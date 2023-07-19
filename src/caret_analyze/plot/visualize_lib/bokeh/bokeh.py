@@ -159,3 +159,9 @@ class Bokeh(VisualizeLibInterface):
         """
         timeseries = BokehTimeSeries(metrics, xaxis_type, ywheel_zoom, full_legends)
         return timeseries.create_figure()
+    
+    def histgram(
+        self,
+        metrics: list[RecordsInterface]
+    ) -> Figure:
+        return Figure()
