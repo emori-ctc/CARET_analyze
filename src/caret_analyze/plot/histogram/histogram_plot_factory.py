@@ -63,7 +63,7 @@ class HistogramPlotFactory:
 
         """
         metrics_: list[Frequency | Latency | Period] = []
-        callback_name = target_objects[0].callback_name
+        callback_names = [obj.callback_name for obj in target_objects]
         # target_objects = target_objects[0]
             # Ignore the mypy type check because type_check_decorator is applied.
         # metrics_ = Latency(target_objects.to_records())  # type: ignore
@@ -77,17 +77,17 @@ class HistogramPlotFactory:
     
         if metrics == 'frequency':
             metrics_ = Frequency(target_objects.to_records())
-            return HistogramPlot(metrics_, visualize_lib, callback_name, metrics)
+            return HistogramPlot(metrics_, visualize_lib, callback_names, metrics)
         elif metrics == 'latency':
             # Ignore the mypy type check because type_check_decorator is applied.
             # metrics_ = Latency(target_objects.to_records())  # type: ignore
             for target_object in target_objects:
                 temp = Latency(target_object.to_records())
                 metrics_.append(temp)
-            return HistogramPlot(metrics_, visualize_lib, callback_name, metrics)
+            return HistogramPlot(metrics_, visualize_lib, callback_names, metrics)
         elif metrics == 'period':
             metrics_ = Period(target_objects.to_records())
-            return HistogramPlot(metrics_, visualize_lib, callback_name, metrics)
+            return HistogramPlot(metrics_, visualize_lib, callback_names, metrics)
         else:
             raise UnsupportedTypeError(
                 'Unsupported metrics specified. '

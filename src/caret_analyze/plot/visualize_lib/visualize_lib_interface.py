@@ -23,6 +23,7 @@ from ..metrics_base import MetricsBase
 from ...runtime import CallbackBase, CallbackGroup, Communication, Path, Publisher, Subscription
 
 from ...record.interface import RecordsInterface
+from ...record import Latency
 
 TimeSeriesTypes = CallbackBase | Communication | (Publisher | Subscription)
 
@@ -91,8 +92,8 @@ class VisualizeLibInterface(metaclass=ABCMeta):
     
     def histogram(
         self,
-        metrics: list[RecordsInterface],
-        callback_name: str,
+        metrics: list[Latency],
+        callback_names: list[str],
         data_type: str
     ) -> Figure:
         raise NotImplementedError()

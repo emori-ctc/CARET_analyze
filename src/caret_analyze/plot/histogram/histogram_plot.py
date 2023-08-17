@@ -35,12 +35,12 @@ class HistogramPlot(PlotBase):
         self,
         metrics: hist_types,
         visualize_lib: VisualizeLibInterface,
-        callback_name: str,
+        callback_names: list[str],
         data_type: str
     ) -> None:
         self._metrics = metrics
         self._visualize_lib = visualize_lib
-        self._callback_name = callback_name
+        self._callback_names = callback_names
         self._data_type = data_type
 
     def to_dataframe(self, xaxis_type: str = 'system_time') -> pd.DataFrame:
@@ -112,7 +112,7 @@ class HistogramPlot(PlotBase):
         #     full_legends
         # )
 
-        return self._visualize_lib.histogram(self._metrics, self._callback_name, self._data_type)
+        return self._visualize_lib.histogram(self._metrics, self._callback_names, self._data_type)
 
     def _validate_xaxis_type(self, xaxis_type: str) -> None:
         if xaxis_type not in ['system_time', 'sim_time', 'index']:
