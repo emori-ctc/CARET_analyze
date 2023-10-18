@@ -25,6 +25,7 @@ import pandas as pd
 logger = getLogger(__name__)
 
 
+
 class PlotBase(metaclass=ABCMeta):
     """Plot base class."""
 
